@@ -20,7 +20,7 @@ const theme = createMuiTheme({
     secondary: {
       main: "#fff",
     },
-  }, 
+  },
 });
 
 /* istanbul ignore next */
