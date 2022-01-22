@@ -6,6 +6,8 @@ Test driven development workflow for react.js. Topics include, Unit, Integration
 
 > React Testing Library: https://github.com/testing-library/react-testing-library && https://testing-library.com/docs/react-testing-library/intro/
 
+> Cheat Sheet: https://testing-library.com/docs/react-testing-library/cheatsheet
+
 > Jest: https://jestjs.io/docs/getting-started
 
 > Cypress: https://www.cypress.io/blog/2021/04/06/cypress-component-testing-react/
