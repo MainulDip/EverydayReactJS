@@ -59,7 +59,7 @@ const Tasks = ({ tasks, onDelete }: { tasks: TasksType[]; onDelete(event: React.
   return (
     <>
       {tasks.map((task: any) => (
-        <Task key={task.id} task={task} />
+        <Task key={task.id} task={task} onDelete={onDelete} />
       ))}
     </>
   );
