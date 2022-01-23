@@ -40,14 +40,20 @@ function App() {
   ]);
 
   // Delete Task
-  const deleteTask = (id: any, e: any) => {
-    console.log(id, e);
+  const deleteTask = (id: any, e: {}) => {
+    console.log(id);
+    setTasks(tasks.filter((task) => task.id !== id));
   };
+
+  //  Toggle reminder
+  const toggleReminder = (id: Number) => {
+    console.log(id)
+  }
 
   return (
     <div className="container">
       <Header />
-      <Tasks tasks={tasks} onDelete={deleteTask} />
+      {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} /> : <div className="">No Task Listed</div> }
     </div>
   );
 }

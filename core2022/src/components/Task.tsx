@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { TasksType } from "../App";
 import { FaTimes } from "react-icons/fa";
 
-function Task(this: any, { task, onDelete }: { task: TasksType, onDelete: any }) {
+function Task(this: any, { task, onDelete }: { task: TasksType, onDelete: Function }) {
   return (
     <div className="task" >
       <h3>

@@ -32,7 +32,7 @@ import Task from "./Task";
 //   },
 // ];
 
-const Tasks = ({ tasks, onDelete }: { tasks: TasksType[]; onDelete: any }) => {
+const Tasks = ({ tasks, onDelete }: { tasks: TasksType[]; onDelete: Function }) => {
   // const [tasks, setTasks] = useState<TasksType[]>(
   //   [
   //     {
