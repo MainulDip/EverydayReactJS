@@ -31,6 +31,12 @@ function App() {
       day: "Feb 7th at 4.30pm",
       reminder: false,
     },
+    {
+      id: 4,
+      text: "Going To Caffee",
+      day: "Feb 7th at 7.30pm",
+      reminder: false,
+    },
   ]);
 
   // Delete Task
