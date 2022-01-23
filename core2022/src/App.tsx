@@ -10,7 +10,7 @@ export type TasksType = {
   reminder: boolean;
 };
 
-function App(this: any) {
+function App() {
   const [tasks, setTasks] = React.useState<TasksType[]>([
     {
       id: 1,
@@ -34,14 +34,14 @@ function App(this: any) {
   ]);
 
   // Delete Task
-  const deleteTask = (id: number, e: any) => {
-    console.log(id, e.target);
+  const deleteTask = (id: any, e: any) => {
+    console.log(id, e);
   };
 
   return (
     <div className="container">
       <Header />
-      <Tasks tasks={tasks} onDelete={deleteTask.bind(this, 12)} />
+      <Tasks tasks={tasks} onDelete={deleteTask} />
     </div>
   );
 }
