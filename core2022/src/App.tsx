@@ -5,13 +5,14 @@ import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 
 export type TasksType = {
-  id: number;
+  id: Number;
   text: string;
   day: string;
   reminder: boolean;
 };
 
 function App() {
+  const [showAddTask, setShowAddTask] = React.useState(false);
   const [tasks, setTasks] = React.useState<TasksType[]>([
     {
       id: 1,
@@ -40,6 +41,14 @@ function App() {
     },
   ]);
 
+  // Add Task
+  const addTask = (task: any) => {
+    // console.log("adding task", task);
+    const id = Math.floor(Math.random() * 1000) + 1;
+    const newTask = { id, ...task };
+    setTasks([...tasks, newTask]);
+  };
+
   // Delete Task
   const deleteTask = (id: any, e: {}) => {
     console.log(id);
@@ -60,8 +69,9 @@ function App() {
 
   return (
     <div className="container">
-      <Header />
-      <AddTask />
+      <Header showAdd={showAddTask} onAdd={() => setShowAddTask(!showAddTask)} />
+      {showAddTask ? <AddTask onAdd={addTask} /> : ""}
+
       {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} /> : <div className="">No Task Listed</div>}
     </div>
   );
