@@ -29,7 +29,8 @@ function App() {
   ]);
 
   // Delete Task
-  const deleteTask = (id: any, e: {}, o: Number) => {
+  const deleteTask = (id: any, o: Number, e: {}) => {
+    //  e for event will always be last argument in case of 'this' binding
     console.log(id, e, o);
   };
 

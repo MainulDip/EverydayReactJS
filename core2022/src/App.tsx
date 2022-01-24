@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
+import AddTask from "./components/AddTask";
 
 export type TasksType = {
   id: number;
@@ -46,14 +47,22 @@ function App() {
   };
 
   //  Toggle reminder
-  const toggleReminder = (id: Number) => {
-    console.log(id)
-  }
+  const toggleReminder = (id?: Number, e?: any) => {
+    e.preventDefault();
+    if (e.type !== "dblclick") return;
+    // console.log("ToggleReminder", id, e);
+    setTasks(
+      tasks.map((task) => {
+        return task.id === id ? { ...task, reminder: !task.reminder } : task;
+      })
+    );
+  };
 
   return (
     <div className="container">
       <Header />
-      {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} /> : <div className="">No Task Listed</div> }
+      <AddTask />
+      {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} /> : <div className="">No Task Listed</div>}
     </div>
   );
 }

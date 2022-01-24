@@ -32,7 +32,7 @@ import Task from "./Task";
 //   },
 // ];
 
-const Tasks = ({ tasks, onDelete }: { tasks: TasksType[]; onDelete: Function }) => {
+const Tasks = ({ tasks, onDelete, onToggle }: { tasks: TasksType[]; onDelete: Function, onToggle: Function }) => {
   // const [tasks, setTasks] = useState<TasksType[]>(
   //   [
   //     {
@@ -59,7 +59,7 @@ const Tasks = ({ tasks, onDelete }: { tasks: TasksType[]; onDelete: Function }) 
   return (
     <>
       {tasks.map((task: any) => (
-        <Task key={task.id} task={task} onDelete={onDelete} />
+        <Task key={task.id} task={task} onDelete={onDelete} onToggle={onToggle} />
       ))}
     </>
   );
