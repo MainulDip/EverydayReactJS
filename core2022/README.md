@@ -66,3 +66,6 @@ import { BrowserRouter } from "react-router-dom";
 // Also can define route then
 // Route Should Be Wraped By Routes 
 ```
+
+### API And Hooks
+> Contex API => Docs https://reactjs.org/docs/context.html | https://github.com/MainulDip/AnimatedExpenseTrackingAppReact.git
