@@ -48,3 +48,20 @@ function Task(this: any, { task, onDelete }: { task: TasksType, onDelete: Functi
   );
 };
 ```
+
+### Routing with React-Router-Dom:
+> In React Core, There is no routing functionality. npm i react-router-dom
+
+> Follow Docs: https://reactrouter.com/docs/en/v6 | To Use Routing
+```js
+// index.tsx
+import { BrowserRouter } from "react-router-dom";
+// Then wrap everythin inside <BrowserRouter><BrowserRouter/>
+<React.StrictMode>
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+</React.StrictMode>
+// You can replace <Link> with <a> then
+// Also can define route then
+```
