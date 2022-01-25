@@ -64,4 +64,5 @@ import { BrowserRouter } from "react-router-dom";
 </React.StrictMode>
 // You can replace <Link> with <a> then
 // Also can define route then
+// Route Should Be Wraped By Routes 
 ```
