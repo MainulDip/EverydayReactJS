@@ -120,9 +120,9 @@ function Chieldcomponent(){
 
 ### Additional Hooks
 
->1: useRef() | creates Mutable object that keeps the same reference between re-renders
+>1: useRef() | creates Mutable object that keeps the same reference between re-renders and also, useRef is completely seperated from component render cycle
 
-Note: Best usecase => grab native HTML elements from jsx 
+Note: Best usecase => grab native HTML elements from jsx, and store previous state value
 ```js
 // App.js
 const myBtn = useRef(null)
@@ -136,7 +136,7 @@ return <button onClick={ () => () => count.current++ }>ClickMe {count.current}
 // But clicking the button will not change UI because useRef does not re-render like setState
 ```
 
->1: useReducer()
+>1: useReducer() | Little like Redux way of state management
 ```js
 // App.js
 function App(){
@@ -163,12 +163,83 @@ function reducer(state, action){
 }
 ```
 
->1: useState( () => {}, [] )
+>1: useMemo( () => {}, []) | Memorization | cache result/return of function call | Use only for expensive coputation
+```js
+const [count, setCounet] = useState(77777777777)
+const expensiveComputation = useMemo( () => {
+    return count ** 77777777777777
+} [count])
+// it will only rerender is 'count' state update. Somewhat like the useEffect pattern
+```
 
->1: useState( () => {}, [] )
+>1: useCallback( () => {}, [] ) | Memorize the entire function to prevent unnecery rerenders
+```js
+const [count, setCounet] = useState(77777777777)
+const showCount = useCallback(()=>{
+    alert(`Count ${count}`)
+}, [count])
+// when same function is passed down to multiple chield components (Lists), using useCallback could prevent that.
+```
 
->1: useState( () => {}, [] )
+>1: useImparativeHandle(ref, Fn) | uses useRef and forwardRed | Healps access and controle custom developed component libraries
+```js
+// Button.js
+function Button(props, refs){
+    const count = useRef(null)
+    const clickIt = ()=> 'something'
+    // useImperativeHandle modife the exposed ref
+    useImperativeHandle(ref, ()=>({
+        click: ()=>{
+            console.log('clicking button')
+            myBtn.current.click()
+        }
+    }))
+    return <button ref={myBtn}>ClickMe {count.current}
+    </button>
+}
+Const ButtonF = forwardRef(Button)
+```
 
->1: useState( () => {}, [] )
+>1: useLayoutEffect( () => {}, [] ) | will run after component render but before ui paint | Blocks visual updates until callback is completed
+```js
+useLayoutEffect(()=>{
+    const rect = button.getBoundingClientRect()
+    console.log(rect)
+})
+// It will run after the componet render but before UI get updated/painted
+```
 
->1: useState( () => {}, [] )
+>1: useDebugValue( () => {}, [] ) | For Custom Hooks, add custom lable
+
+> Custom Hooks and useDebugValue
+```js
+function App(){
+    const [displayName, setDisplayName] = useState();
+    useEffect((props)=>{
+        const data = fetchFromDatabase(props.userId) // fetch data from a remote server
+        setDisplayName(data.displayName)
+    }, [])
+
+    return <button>{displayName}<button/>
+}
+
+// To Make custom Hook create use[stateName] function outside of the component
+
+function useDisplayName(){
+    const [displayName, setDisplayName] = useState();
+    useEffect((props)=>{
+        const data = fetchFromDatabase(props.userId) // fetch data from a remote server
+        setDisplayName(data.displayName)
+    }, [])
+    // useDebugValue will console log into react dev tool and show value
+    useDebugValue(displayName ?? 'Loading.......')
+    return displayName;
+}
+
+
+function App(){
+    const displayName = useDisplayName()
+
+    return <button>{displayName}<button/>
+}
+```
