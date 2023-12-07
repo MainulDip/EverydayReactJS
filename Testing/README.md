@@ -4,7 +4,7 @@ Test driven development workflow for react.js. Topics include, Unit, Integration
 
 > React Test Utils: https://reactjs.org/docs/test-utils.html
 
-> React Testing Library: https://github.com/testing-library/react-testing-library && https://testing-library.com/docs/react-testing-library/intro/
+> React Testing Library: https://github.com/testing-library/react-testing-library && https://testing-library.com/docs/react-testing-library/intro/.
 
 > Cheat Sheet: https://testing-library.com/docs/react-testing-library/cheatsheet
 
