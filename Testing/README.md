@@ -23,8 +23,8 @@ run 'yarn install && yarn dev' | username: johndoe | Password: s3cret
 Testing a very small part of the application. Thus "unit" naming.
 
 
-### Integration Testing:
-Testing Multiple units of the application if those are working correctly togather. Combile multiple unit test into one large test.
+### Integration Testing
+Testing Multiple units of the application if those are working correctly together. Combine multiple unit test into one large test
 
 ### End-to-End Testing:
-Front to Back testing. Mimiking an actual user using the application on the browser.
+Front to Back testing. Mimicking an actual user using the application on the browser.
