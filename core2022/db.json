@@ -17,18 +17,6 @@
       "text": "Food shopping",
       "day": "Feb 7th at 4.30pm",
       "reminder": false
-    },
-    {
-      "id": 4,
-      "text": "Going To Caffee",
-      "day": "Feb 7th at 7.30pm",
-      "reminder": false
-    },
-    {
-      "text": "DATA NEW",
-      "day": "Description",
-      "reminder": false,
-      "id": 5
     }
   ]
 }
