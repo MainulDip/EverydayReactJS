@@ -14,7 +14,7 @@ function Square() {
 
   return <button className="square" onClick={handleClick.bind(this, value)}>{value}</button>;
 ```
-### JS Closures
+### JS Closures:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 ```js
 function makeAdder(x) {
