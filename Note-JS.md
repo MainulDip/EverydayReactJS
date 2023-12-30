@@ -1,7 +1,7 @@
 ### fn.bind():
 ```jsx
 /**
- * bind send the fn as object as last parameter of the receiver fun
+ * bind send the fn as object as last parameter of the receiver functions
 */
 function Square() {
   const value = 7;
