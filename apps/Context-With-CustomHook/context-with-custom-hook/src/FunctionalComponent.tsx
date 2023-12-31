@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
 import ClassContextComponent from './ClassComponent'
-import { ThemeContext, ThemeUpdateContext } from './ThemeContextCustomHook'
+import { useThemeContextHook, useThemeUpdateContextHook } from './ThemeContextCustomHook'
 
 export default function FunctionContextComponent () {
-  const darkStyles = useContext(ThemeContext)
-  const toggleTheme = useContext(ThemeUpdateContext)
+  // using custom hook to fetch the contexts
+  const darkStyles = useThemeContextHook()
+  const toggleTheme = useThemeUpdateContextHook()
+  
   return (
     <>
     <button onClick={toggleTheme}>Toggle Theme</button>
