@@ -3,27 +3,27 @@ import './App.css'
 import React, { useState } from 'react'
 import ClassContextComponent from './ClassComponent'
 import FunctionContextComponent from './FunctionalComponent'
+import { ThemeProvider } from './ThemeContextCustomHook'
 
 /**
  * the default value with createContext will be used
  * when any component is not wrapped with the Context.Provider
  * but call useContext(Context) inside of them
  */
-export const ThemeContext = React.createContext(false)
+// export const ThemeContext = React.createContext(false)
 
 function App () {
-  const [darkTheme, setDarkTheme] = useState(false)
-  function toggleTheme () {
-    setDarkTheme(prevDarkTheme => !prevDarkTheme)
-  }
+  // const [darkTheme, setDarkTheme] = useState(false)
+  // function toggleTheme () {
+  //   setDarkTheme(prevDarkTheme => !prevDarkTheme)
+  // }
 
   return (
     <>
-      <ThemeContext.Provider value={darkTheme}>
-        <button onClick={toggleTheme}>Toggle Theme</button>
+      <ThemeProvider>
         <FunctionContextComponent />
         <ClassContextComponent />
-      </ThemeContext.Provider>
+      </ThemeProvider>
     </>
   )
 }

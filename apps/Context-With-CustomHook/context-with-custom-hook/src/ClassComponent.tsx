@@ -1,8 +1,5 @@
 import React, { Component, useContext } from 'react'
-import { ThemeContext } from './App'
-
-// another way of getting the Context, hooks are only allowed inside functional Component
-const DarkTheme = () => useContext(ThemeContext)
+import { ThemeContext } from './ThemeContextCustomHook'
 
 export default class ClassContextComponent extends Component {
   themeStyles (dark: any) {
@@ -16,25 +13,16 @@ export default class ClassContextComponent extends Component {
 
   /**
    * This is the recommended way with class component
+   * With Functional Component, call get context using useContext
+   * then inject directly 
    */
-  /*
     render () {
       return (
         <ThemeContext.Consumer>
-          {darkTheme => (
+          { (darkTheme: any) => (
             <div style={this.themeStyles(darkTheme)}>Class Theme</div>
           )}
         </ThemeContext.Consumer>
       )
     }
-  */
-
-  // experimenting, maybe not recommended
-  render (): React.ReactNode {
-    return (
-      <>
-        <div style={this.themeStyles(DarkTheme)}>Class Theme</div>
-      </>
-    )
-  }
 }
