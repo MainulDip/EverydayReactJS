@@ -8,7 +8,7 @@ import { ThemeProvider } from './ThemeContextCustomHook'
 /**
  * the default value with createContext will be used
  * when any component is not wrapped with the Context.Provider
- * but call useContext(Context) inside of them
+ * but call useContext(Context) inside from them
  */
 // export const ThemeContext = React.createContext(false)
 

@@ -29,3 +29,7 @@ const add10 = makeAdder(10);
 console.log(add5(2)); // 7
 console.log(add10(2)); // 12
 ```
+
+### Pure Function:
+* Pure Fn does not change any objects or variables out of its scope.
+* Same inputs, same output. Given the same inputs, a pure function should always return the same result.

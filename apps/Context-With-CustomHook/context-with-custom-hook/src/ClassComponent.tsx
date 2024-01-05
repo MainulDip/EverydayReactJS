@@ -14,7 +14,7 @@ export default class ClassContextComponent extends Component {
   /**
    * This is the recommended way with class component
    * With Functional Component, call get context using useContext
-   * then inject directly 
+   * then inject that directly
    */
     render () {
       return (

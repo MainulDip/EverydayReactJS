@@ -10,6 +10,7 @@ export default function FunctionContextComponent () {
   return (
     <>
     <button onClick={toggleTheme}>Toggle Theme</button>
+      
       <div style={ClassContextComponent.prototype.themeStyles(darkStyles)}>
         Functional Component Using Context API
       </div>
