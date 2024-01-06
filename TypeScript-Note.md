@@ -1,6 +1,6 @@
 ### Common Types:
 ```tsx
-// type with default value of useContext
+// type with default value of useContext.
 export const ThemeContext = React.createContext(false)
 export const ThemeUpdateContext = React.createContext(()=>{})
 ```

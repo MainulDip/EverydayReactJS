@@ -65,3 +65,56 @@ const arr3 = arr.slice()
 // and mutate the copy:
 arr3.push('c')
 ```
+
+### Closure | Curried | Currying | Multiple chained Arrow fn:
+Closure can be called using `fn(v)(f)` way.
+
+```js
+const checkIfOdd = (amount) => (dispatch) => {
+  const currentValue = amount;
+  if (currentValue % 2 === 0) {
+    return dispatch(`${amount} is an even value`);
+  } else {
+    return dispatch(`${amount} is an odd value`);
+  }
+};
+
+const d = (i) => { console.log(i) }
+checkIfOdd(12)(d)
+checkIfOdd(7)((i)=> console.log(i))
+checkIfOdd(4)(console.log)
+```
+
+More simpler example
+```js
+const someFun = (a) => (b) => {
+  let c = b(a)
+  return c
+}
+
+someFun('Hello world')(d)
+```
+* TypeScript makes more Scene
+
+```ts
+// converting above fn in TS
+const someFun = (a: any) => (b: (a: any) => any) => {
+  let c = b(a);
+  return c;
+};
+```
+
+* Curried | Currying Function : https://stackoverflow.com/questions/32782922/what-do-multiple-arrow-functions-mean-in-javascript
+
+```js
+// arrow currying fn
+const addArrow = x => y => x + y
+// non-arrow
+const addRegular = function (x) {
+  return function (y) {
+    return x + y
+  }
+}
+
+addArrow(3)(4) // reruns 7
+```
