@@ -22,6 +22,29 @@ Redux commonly used together with
 
 - `immutable state update` -> make copies of existing objects/arrays, and then modify the copies using object `spread operators | ...obj`, as well as array methods (concat/slice) that return new copies of the array instead of mutating the original array. Redux expects that all state updates are done immutably.
 
+
+### Store:
+The current Redux application state lives in an object called the store. We have a `single store` in a Redux application.
+
+The Redux store is created using the configureStore function from Redux Toolkit. It requires a reducer or a `root reducer` (combination of multiple reducers) in its the reducer argument. 
+
+Store has a method called getState that returns the current state value
+
+```js
+import { configureStore } from '@reduxjs/toolkit'
+
+// const store = configureStore({ reducer: counterReducer })
+
+export const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+});
+
+console.log(store.getState())
+// {value: 0}
+```
+
 ### Actions with `type` and `payload` + Action Creators:
 An action is a plain JavaScript object that has a `type` field (and optional `payload` field for additional info about the `type` event).
 
@@ -73,17 +96,28 @@ function counterReducer(state = initialState, action) {
 }
 ```
 
-### Store:
-The current Redux application state lives in an object called the store .
-
-The store is created by passing in a reducer, and has a method called getState that returns the current state value
+### Root Reducer:
+A Redux store needs to have a single "root reducer" function passed in when it's created. Its a combination of different reducers. Combining of reducers can be done manually or using Redux's `combineReducers`.
 ```js
-import { configureStore } from '@reduxjs/toolkit'
+const store = configureStore({
+  reducer: rootReducer
+})
 
-const store = configureStore({ reducer: counterReducer })
+// Combining reducer with Redux's combineReducers Function
+const rootReducer = combineReducers({
+  users: usersReducer,
+  posts: postsReducer,
+  comments: commentsReducer
+})
 
-console.log(store.getState())
-// {value: 0}
+// Can be combined using manually as well
+function rootReducer(state = {}, action) {
+  return {
+    users: usersReducer(state.users, action),
+    posts: postsReducer(state.posts, action),
+    comments: commentsReducer(state.comments, action)
+  }
+}
 ```
 
 ### Dispatch (`dispatching actions` == `triggering an event`):
@@ -105,7 +139,7 @@ console.log(store.getState())
 // {value: 2}
 ```
 
-### Selectors (exact value extractor fn from the store's current state):
+### Selectors and useSelector (exact value extractor fn from the store's current state and re-render UI is it's been changed):
 Selectors are functions that know how to extract specific pieces of information from a store state value. As an application grows bigger, this can help avoid repeating logic as different parts of the app need to read the same data
 ```js
 const selectCounterValue = state => state.value

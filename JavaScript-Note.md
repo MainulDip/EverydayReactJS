@@ -104,7 +104,7 @@ const someFun = (a: any) => (b: (a: any) => any) => {
 };
 ```
 
-* Curried | Currying Function : https://stackoverflow.com/questions/32782922/what-do-multiple-arrow-functions-mean-in-javascript
+* Curried | Currying Function : https://stackoverflow.com/questions/32782922/what-do-multiple-arrow-functions-mean-in-javascript.
 
 ```js
 // arrow currying fn
