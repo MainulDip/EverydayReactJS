@@ -120,5 +120,5 @@ addArrow(3)(4) // reruns 7
 ```
 
 ### Topic Refresh:
-- Promise, Fetch, Async/Await, 
+- Promise, Fetch, Async/Await, Futures
 - JSON Encoding/Decoding, Axios, Ajax

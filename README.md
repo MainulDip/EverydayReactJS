@@ -14,3 +14,14 @@ See - <a href="./apps/tictaktoe-typescript/">TicTacToe TypeScript</a>
 5. Next.js Threads (later implement on RN, SwiftUI and JetPack Compose)
 6. Dive Deeper Into Expo
 7. `React Native Cli` and `Expo prebuild` also Native Modules and Component implementation
+
+
+### Ongoing:
+* Redux 001
+
+### Next:
+-> JS Revised Topics
+-> Zustand
+-> React useReducer + Context API
+-> Expo RN official tutorial 001
+-> Next.js Official tutorial 001
