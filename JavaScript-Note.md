@@ -118,3 +118,7 @@ const addRegular = function (x) {
 
 addArrow(3)(4) // reruns 7
 ```
+
+### Topic Refresh:
+- Promise, Fetch, Async/Await, 
+- JSON Encoding/Decoding, Axios, Ajax
