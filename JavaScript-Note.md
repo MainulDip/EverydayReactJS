@@ -118,7 +118,57 @@ const addRegular = function (x) {
 
 addArrow(3)(4) // reruns 7
 ```
+###  Async Function and Await keyword prefix:
+Usually Async functions are used to Handle Promise (alternate to promise.then.catch chaining), where there will be some delay for fetching data from server or for other computation.
+`await` keyword before the function call stop code execution further until that return something (resolved/reject).
+
+```js
+function resolveAfter2Seconds() {
+  return new Promise(function (resolve) {
+    setTimeout(() => {
+      resolve('resolved');
+    }, 2000);
+  });
+}
+
+// with arrow fn `const asyncCall = async () => {}`
+async function asyncCall() {
+  console.log('calling');
+  // await will halt the execution untill resolved
+  const result = await resolveAfter2Seconds();
+  console.log(result);
+  // Expected output: "resolved"
+}
+
+asyncCall();
+
+// output
+// "calling"
+// "resolved"
+```
+
+### Promise and Fetch API:
+`Promise` in JS handles asynchronous operations, providing better control over the flow of code. Fetch is a promise base API and hence return a promise.
+
+```ts
+const myPromise: Promise<string> = new Promise( function (resolve, reject) {
+  // This Promise resolves to a string
+  setTimeout(() => {
+    resolve('resolved');
+  }, 2000);
+});
+
+myPromise.then((value) => {
+  console.log('Promise resolved with value: ' + value);
+})
+.catch((error) => { // if rejected is called, catch block will be executed
+  console.error('Promise rejected with error: ' + error);
+});
+```
+
+Fetch API: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
 ### Topic Refresh:
 - Promise, Fetch, Async/Await, Futures
 - JSON Encoding/Decoding, Axios, Ajax
+- Node.js and Express REST implementation
