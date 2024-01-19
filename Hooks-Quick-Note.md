@@ -120,7 +120,7 @@ function Chieldcomponent(){
 
 ### Additional Hooks
 
->1: useRef() | creates Mutable object that keeps the same reference between re-renders and also, useRef is completely seperated from component render cycle
+>1: useRef() | creates Mutable object that keeps the same reference between re-renders and also, useRef is completely separated from component render cycle
 
 Note: Best usecase => grab native HTML elements from jsx, and store previous state value
 ```js
