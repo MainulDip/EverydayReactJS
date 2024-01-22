@@ -118,7 +118,7 @@ function Chieldcomponent(){
 ```
 
 
-### Additional Hooks
+### Additional Hook
 
 >1: useRef() | creates Mutable object that keeps the same reference between re-renders and also, useRef is completely separated from component render cycle
 
@@ -206,7 +206,7 @@ useLayoutEffect(()=>{
     const rect = button.getBoundingClientRect()
     console.log(rect)
 })
-// It will run after the componet render but before UI get updated/painted
+// It will run after the component render but before UI get updated/painted
 ```
 
 >1: useDebugValue( () => {}, [] ) | For Custom Hooks, add custom lable
@@ -235,6 +235,7 @@ function useDisplayName(){
     useDebugValue(displayName ?? 'Loading.......')
     return displayName;
 }
+
 
 
 function App(){

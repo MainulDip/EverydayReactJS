@@ -33,7 +33,7 @@ const domNode = document.getElementById('root');
 const root = hydrateRoot(domNode, reactNode);
 ```
 
-### use() hook:
+### use() hook
 `use` is a React Hook that lets you read the value of a resource like a Promise or context.
 ```js
 const value = use(resource);
