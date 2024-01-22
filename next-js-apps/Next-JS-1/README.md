@@ -13,10 +13,49 @@
 ### Prisma ORM (Recommended):
 Prisma will automatically generate TypeScript types based on the database schema.
 
+### Styling Options:
+- tailwind
+- css modules
+- styled-jsx
+- styled-components
+- emotion
+
 ### CSS Modules:
 CSS Modules are an optional feature and are only enabled for files with the `.module.css` extension.
 
 CSS Modules locally scope CSS by automatically creating a unique class name. 
+```css
+/* style-file.module.css */
+.shape {
+  height: 0;
+  width: 0;
+  border-bottom: 30px solid black;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+}
+```
+
+```js
+// import all the content by a name, and call rules by that name from a component
+import styles from '@/app/ui/home.module.css';
+<div className={styles.shape} />;
+```
+
+### `clsx` lib for toggle classnames:
+`clsx` is a library that lets toggle classnames easily (`clsx(otherClasses, {"classF": a === b, "classS": c === d})`)
+
+```js
+<span
+      className={clsx(
+        'inline-flex items-center rounded-full px-2 py-1 text-sm',
+        {
+          'bg-gray-100 text-gray-500': status === 'pending',
+          'bg-green-500 text-white': status === 'paid',
+        },
+      )}
+    >
+```
+
 ### Next from NextJS:
 1. NodeJS Vanilla implementation
 2. NodeJS with handlebar monolithic server
