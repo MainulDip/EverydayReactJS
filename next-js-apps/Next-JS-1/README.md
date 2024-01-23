@@ -56,6 +56,28 @@ import styles from '@/app/ui/home.module.css';
     >
 ```
 
+### `next/font/...` module:
+Next.js automatically optimizes fonts those are hooked by `next/font/...` modules.
+
+- font adding workflow => import the font form `next/font/...` module, configure and export. Then use that font in components `className` field. Global font's are hooked inside layout's body tag.
+
+```js
+// app/ui/fonts.to
+import { Inter } from 'next/font/google';
+export const inter = Inter({ subsets: ['latin'] });
+
+// add in layout component
+import { inter } from '@/app/ui/fonts';
+
+export default function RootLayout({children}) {
+    return (
+    <html lang="en">
+      <body className={`${inter.className} antialiased`}>{children}</body>
+    </html>
+    )
+}
+```
+
 ### Next from NextJS:
 1. NodeJS Vanilla implementation
 2. NodeJS with handlebar monolithic server
