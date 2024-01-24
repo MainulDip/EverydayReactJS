@@ -78,6 +78,43 @@ export default function RootLayout({children}) {
 }
 ```
 
+### `<Image />` Component (optimized):
+The <Image> Component is an extension of the HTML <img> tag, and comes with automatic image optimization. Like `Prevent layout shift`, `image resize for mobile/desktop`, `lazy loading` and `WebP/AVIF`
+
+`src` and `alt` are required props for hooking local images
+
+```ts
+// other imports
+import Image from 'next/image'
+import img_hero_desktop from './../public/hero-desktop.png';
+import img_hero_mobile from './../public/hero-mobile.png';
+ 
+export default function Page() {
+  return (
+    <>
+      <Image
+        src="hero-desktop.png" // will auto pick form public directory
+        alt="Picture of the author"
+        // width={500} automatically provided with local images
+        // height={500} automatically provided
+        // blurDataURL="data:..." automatically provided
+        // placeholder="blur" // Optional blur-up while loading
+        className="hidden md:block" // hide on mobile (from tailwind css)
+      />
+
+
+      // when on mobile, this will be shown instead of desktop
+
+      <Image
+        src={img_hero_mobile} // will auto pick form public directory
+        alt="Picture of the author"
+        className="block md:hidden" // hide on desktop (from tailwind css)
+      />
+    </>
+  )
+}
+```
+
 ### Next from NextJS:
 1. NodeJS Vanilla implementation
 2. NodeJS with handlebar monolithic server

@@ -3,6 +3,10 @@ import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import styles from '@/app/ui/home.module.css';
 
+import Image from 'next/image';
+import img_hero_desktop from './../public/hero-desktop.png';
+import img_hero_mobile from './../public/hero-mobile.png';
+
 export default function Page() {
   return (
     <main className="flex min-h-screen flex-col p-6">
@@ -15,8 +19,8 @@ export default function Page() {
           {/* <div
             className="h-0 w-0 border-b-[30px] border-l-[20px] border-r-[20px] border-b-black border-l-transparent border-r-transparent"
           /> */}
-          
-          <div className={styles.shape}/>
+
+          <div className={styles.shape} />
 
           <p className={`text-xl text-gray-800 md:text-3xl md:leading-normal`}>
             <strong>Welcome to Acme.</strong> This is the example for the{' '}
@@ -33,7 +37,22 @@ export default function Page() {
           </Link>
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          {/* Add Hero Images Here */}
+          <Image
+            src='/hero-desktop.png' // local form public with hardcode src
+            width={1000}
+            height={760}
+            className="hidden md:block"
+            alt='Screenshots of the dashboard project showing desktop version'
+          />
+
+          {/* Mobile Image */}
+          <Image
+            src={img_hero_mobile} // using local imports
+            width={560}
+            height={620}
+            className="block md:hidden"
+            alt="Screenshot of the dashboard project showing mobile version"
+          />
         </div>
       </div>
     </main>
