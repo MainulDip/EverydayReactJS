@@ -168,7 +168,7 @@ myPromise.then((value) => {
 
 Fetch API: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
-### Currying Functions:
+### Currying Functions
 It is a technique in functional programming, that transforms the function of multiple arguments into several `functions of a single argument` in sequence. 
 ```js
 function calculateVolume(length) {

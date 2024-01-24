@@ -88,6 +88,7 @@ The <Image> Component is an extension of the HTML <img> tag, and comes with auto
 * there are also `loader` function/prop for per image and for application level with `loaderFile configuration`.
 
 docs -> https://nextjs.org/docs/app/building-your-application/optimizing/images#local-images
+docs -> https://nextjs.org/docs/app/api-reference/components/image
 
 ```ts
 // Image Component Demo
@@ -121,10 +122,32 @@ export default function Page() {
   )
 }
 ```
+
 ### Routing System (API Routes):
 Next.js uses file-system routing where folders are used to create nested routes. Each folder inside `app` directory map to a URL. `page.tsx` is the landing page for each directory. Also each directory can have its own `layout.tsx` file.
 
+* when there is a `layout.tsx`, the `page.tsx` will be injected as layout's props.children automatically
+
 Only `page.tsx` file is accessible as home URL for that directory. So UI components and other re-usable file can live in that directory without conflict.
+
+```tsx
+import SideNav from "../ui/dashboard/sidenav";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+    return (
+        <>
+            <div> <SideNav/> </div>
+            <div> { children } </div>
+        </>
+    )
+}
+```
+
+* on navigation by `Link` component, only the children (`page.tsx`) components updates while the layout.tsx won't re-render. Which is `partial rendering` (https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#3-partial-rendering)
+
+
+### RootLayout (Required For Root Level Home/Landing app/layout.tsx):
+RootLayout is shared across all pages. It provide access to modify `<html>` and `<body>` tags
 
 ### Next from NextJS:
 1. NodeJS Vanilla implementation
