@@ -83,7 +83,14 @@ The <Image> Component is an extension of the HTML <img> tag, and comes with auto
 
 `src` and `alt` are required props for hooking local images
 
+* Remote/Network Fetched image's src property should be a URL string, also `width`, `height` are required and optional `blurDataURL` needs to be injected manually.
+
+* there are also `loader` function/prop for per image and for application level with `loaderFile configuration`.
+
+docs -> https://nextjs.org/docs/app/building-your-application/optimizing/images#local-images
+
 ```ts
+// Image Component Demo
 // other imports
 import Image from 'next/image'
 import img_hero_desktop from './../public/hero-desktop.png';
@@ -114,6 +121,10 @@ export default function Page() {
   )
 }
 ```
+### Routing System (API Routes):
+Next.js uses file-system routing where folders are used to create nested routes. Each folder inside `app` directory map to a URL. `page.tsx` is the landing page for each directory. Also each directory can have its own `layout.tsx` file.
+
+Only `page.tsx` file is accessible as home URL for that directory. So UI components and other re-usable file can live in that directory without conflict.
 
 ### Next from NextJS:
 1. NodeJS Vanilla implementation
