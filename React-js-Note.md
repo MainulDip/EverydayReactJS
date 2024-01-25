@@ -38,5 +38,74 @@ const root = hydrateRoot(domNode, reactNode);
 ```js
 const value = use(resource);
 ```
+### Lib `React Router`:
+
+### Lib `@heroicons/react`:
+Its a svg icon library where each icon can be imported individually as a React component.
+
+Docs -> https://heroicons.com/outline
+
+```jsx
+import { BeakerIcon } from '@heroicons/react/24/solid'
+
+function MyComponent() {
+  return (
+    <div>
+      <BeakerIcon className="h-6 w-6 text-blue-500" />
+      <p>...</p>
+    </div>
+  )
+}
+```
+
+### Lib `clsx` for Conditional Class:
+
+```jsx
+<Link
+  key={link.name}
+  href={link.href}
+  className={clsx(
+    'flex h-[48px]',
+    {
+      'bg-sky-100 text-blue-600': pathname === link.href,
+    },
+  )}
+>
+  <p className="hidden md:block">{link.name}</p>
+</Link>
+```
+
+* clsx uses with different data types 
+
+```js
+import clsx from 'clsx';
+// or
+import { clsx } from 'clsx';
+
+// Strings (variadic)
+clsx('foo', true && 'bar', 'baz');
+//=> 'foo bar baz'
+
+// Objects
+clsx({ foo:true, bar:false, baz:isTrue() });
+//=> 'foo baz'
+
+// Objects (variadic)
+clsx({ foo:true }, { bar:false }, null, { '--foobar':'hello' });
+//=> 'foo --foobar'
+
+// Arrays
+clsx(['foo', 0, false, 'bar']);
+//=> 'foo bar'
+
+// Arrays (variadic)
+clsx(['foo'], ['', 0, false, 'bar'], [['baz', [['hello'], 'there']]]);
+//=> 'foo bar baz hello there'
+
+// Kitchen sink (with nesting)
+clsx('foo', [1 && 'bar', { baz:false, bat:null }, ['hello', ['world']]], 'cya');
+//=> 'foo bar hello world cya'
+```
+
 ### Next Task Todo:
 1. https://react.dev/blog/2023/03/16/introducing-react-dev#learn-react-step-by-step ()

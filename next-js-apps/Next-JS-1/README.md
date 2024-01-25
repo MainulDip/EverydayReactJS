@@ -20,6 +20,38 @@ Prisma will automatically generate TypeScript types based on the database schema
 - styled-components
 - emotion
 
+### `layout.tsx` and `page.tsx` file:
+Both of this file should `exports default` a `Layout({children})` and `Page()` component.
+
+Next.js uses file-system routing where folders are used to create nested routes. Each folder inside `app` directory map to a URL. `page.tsx` is the landing page for each directory. Also each directory can have its own `layout.tsx` file. If there is no `page.tsx` in a directory, accessing that through url will return 404.
+
+
+a `RootLayout` exports is required `app/layout.tsx` and this is applied to global layout for the app. Directory level layouts are scoped to each directory and sub-directory. Same goes for `layout.tsx` 
+
+* when there is a `layout.tsx`, the `page.tsx` will be injected as layout's props.children automatically
+
+```tsx
+// demo layout.tsx
+import SideNav from "../ui/dashboard/sidenav";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+    return (
+        <>
+            <div> <SideNav/> </div>
+            <div> { children } </div>
+        </>
+    )
+}
+
+// demo page.tsx
+export default function Page() {
+  return (
+    <>
+      <div>Page Content</div>
+    </>
+  )
+```
+
 ### CSS Modules:
 CSS Modules are an optional feature and are only enabled for files with the `.module.css` extension.
 
@@ -44,7 +76,7 @@ import styles from '@/app/ui/home.module.css';
 ### `clsx` lib for toggle classnames:
 `clsx` is a library that lets toggle classnames easily (`clsx(otherClasses, {"classF": a === b, "classS": c === d})`)
 
-```js
+```tsx
 <span
       className={clsx(
         'inline-flex items-center rounded-full px-2 py-1 text-sm',
@@ -90,7 +122,7 @@ The <Image> Component is an extension of the HTML <img> tag, and comes with auto
 docs -> https://nextjs.org/docs/app/building-your-application/optimizing/images#local-images
 docs -> https://nextjs.org/docs/app/api-reference/components/image
 
-```ts
+```tsx
 // Image Component Demo
 // other imports
 import Image from 'next/image'
@@ -128,7 +160,7 @@ Next.js uses file-system routing where folders are used to create nested routes.
 
 * when there is a `layout.tsx`, the `page.tsx` will be injected as layout's props.children automatically
 
-Only `page.tsx` file is accessible as home URL for that directory. So UI components and other re-usable file can live in that directory without conflict.
+Only `page.tsx` file is accessible as home URL for that directory. So UI components and other re-usable file can live in that directory without conflict. the `Page()` component should be default exports
 
 ```tsx
 import SideNav from "../ui/dashboard/sidenav";
@@ -147,7 +179,60 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 
 ### RootLayout (Required For Root Level Home/Landing app/layout.tsx):
-RootLayout is shared across all pages. It provide access to modify `<html>` and `<body>` tags
+RootLayout is shared across all pages. It provide access to modify `<html>` and `<body>` tags.
+
+```tsx
+import '@/app/ui/global.css';
+import { inter } from './ui/fonts'; // default font
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className={`${inter.className} antialiased`}>
+        {children}
+        </body>
+    </html>
+  );
+}
+```
+
+### `<Link>` instead of `<a>` for avoiding hard page refresh:
+Next.js automatically code splits the application by route segments. This is different from a traditional React SPA, where the browser loads all the application code on initial load.
+
+Splitting code by routes means that pages become isolated. If a certain page throws an error, the rest of the application will still work.
+
+
+* in production, whenever <Link> components appear in the browser's viewport, Next.js automatically prefetches the code for the linked route in the background, what makes the page transition near-instant on click.
+
+```tsx
+<Link
+    href="/dashboard"
+    className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
+  >
+  <p className="hidden md:block">{link.name}</p>
+</Link>
+```
+
+### `useCurrentPage()` for indicating current/active url/link:
+Next.js provides a hook called usePathname(), which returns the current browser URL. To use a hook, `"use client"` top directive is required.
+```tsx
+const LinkIcon = link.icon; // import { usePathname } from 'next/navigation';
+  return (
+    <Link
+      href="/url"
+      className={ clsx(
+        'flex h-[48px] grow items-center justify-center gap-2',
+        { 'bg-sky-100 text-blue-600': activeURL === link.href },
+      )}
+    >
+      <p className="hidden md:block">link</p>
+    </Link>
+  );
+```
 
 ### Next from NextJS:
 1. NodeJS Vanilla implementation
