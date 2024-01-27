@@ -168,7 +168,7 @@ myPromise.then((value) => {
 
 Fetch API: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
-### Currying Functions:
+### Currying Functions
 It is a technique in functional programming, that transforms the function of multiple arguments into several `functions of a single argument` in sequence. 
 ```js
 function calculateVolume(length) {
@@ -179,6 +179,33 @@ function calculateVolume(length) {
     }
 }
 console.log(calculateVolume(4)(5)(6)); // 120
+```
+
+### Destructuring:
+https://dmitripavlutin.com/javascript-object-destructuring/
+```js
+const hero = {
+  name: 'Batman',
+  realName: 'Bruce Wayne'
+};
+
+const { name, realName } = hero;
+
+console.log(name);     // => 'Batman',
+console.log(realName); // => 'Bruce Wayne'
+```
+
+### Dynamic Variable Naming:
+```js
+const hero = {
+  name: 'Batman',
+  realName: 'Bruce Wayne'
+};
+
+const prop = 'name';
+const { [prop]: name } = hero;
+
+console.log(name); // => 'Batman'
 ```
 
 ### Topic Refresh:

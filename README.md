@@ -16,7 +16,7 @@ See - <a href="./apps/tictaktoe-typescript/">TicTacToe TypeScript</a>
 7. `React Native Cli` and `Expo prebuild` also Native Modules and Component implementation
 
 
-### Ongoing:
+### Ongoing
 * Redux 001 (Side by Side) Express (Side by Side) Next.js Official tutorial 001
 
 ### Next:

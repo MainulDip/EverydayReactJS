@@ -107,5 +107,17 @@ clsx('foo', [1 && 'bar', { baz:false, bat:null }, ['hello', ['world']]], 'cya');
 //=> 'foo bar hello world cya'
 ```
 
+### Lib `dotenv`:
+It's a secrets manager for .env files. Run inside app using `require("dotenv").config()` or `import "dotenv/config"` 
+NextJS guide => https://www.dotenv.org/docs/frameworks/nextjs/github-actions
+```sh
+# put this in a .env file
+NEXT_PUBLIC_HELLO="World"
+```
+```json
+// and put this inside script of package.json
+"seed": "node -r dotenv/config ./scripts/seed.js"
+```
+
 ### Next Task Todo:
 1. https://react.dev/blog/2023/03/16/introducing-react-dev#learn-react-step-by-step ()
