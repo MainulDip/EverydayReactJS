@@ -1,4 +1,4 @@
-### fn.bind():
+### fn.bind() in React:
 ```jsx
 /**
  * bind send the fn as object as last parameter of the receiver functions.
@@ -13,6 +13,37 @@ function Square() {
   }
 
   return <button className="square" onClick={handleClick.bind(this, value)}>{value}</button>;
+```
+### Native fn.bind() | Function.prototype.bind():
+The bind() method of Function instances creates a new function that, when called, calls this function with its this keyword set to the provided value, and a given sequence of arguments preceding any provided when the new function is called.
+
+```js
+"use strict";
+
+// note: with named argument, this will be available as last argument
+function log(...args) {
+  console.log(this, ...args);
+  console.log(this[0], this[1])
+}
+
+log(1,2,2) // `this` is the global Window object here, as there are no bound happened
+const boundLog = log.bind("this value", 1, 2); // the first arg (thisArg) will be the value of `this` 
+const boundLog2 = boundLog.bind("new this value", 3, 4); // newly bound thisArg value will be ignored
+boundLog2(5, 6); // "this value", 1, 2, 3, 4, 5, 6
+
+const boundArr = log.bind([7,6])
+boundArr()
+
+/*
+Window {window: Window {...}, self: Window ...} 1 2 2
+undefined undefined
+
+String {0: "t", 1: "h", 2: "i", 3: "s", 4: ...} 1 2 3 4 5 6
+t h
+
+(2) [7, 6]
+7 6
+*/
 ```
 ### JS Closures:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
