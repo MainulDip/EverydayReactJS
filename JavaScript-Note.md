@@ -181,18 +181,30 @@ function calculateVolume(length) {
 console.log(calculateVolume(4)(5)(6)); // 120
 ```
 
-### Destructuring:
-https://dmitripavlutin.com/javascript-object-destructuring/
+### Destructuring Assignment (unpack values from arrays and object):
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 ```js
+// Object Destructuring
 const hero = {
   name: 'Batman',
   realName: 'Bruce Wayne'
 };
 
 const { name, realName } = hero;
-
 console.log(name);     // => 'Batman',
 console.log(realName); // => 'Bruce Wayne'
+
+// Array Destructuring
+const [a, b, ...rest] = [10, 20, 30, 40, 50];
+console.log(a,b); // 10 20
+console.log(rest); // Array [30, 40, 50]
+console.log(...rest) // 30 40 50
+
+// Array Destructuring From Promise.all([])
+const [invoice, customers] = await Promise.all([
+        fetchInvoiceById(id),
+        fetchCustomers()
+    ])
 ```
 
 ### Dynamic Variable Naming:
@@ -207,6 +219,7 @@ const { [prop]: name } = hero;
 
 console.log(name); // => 'Batman'
 ```
+
 
 ### Topic Refresh:
 - Promise, Fetch, Async/Await, Futures

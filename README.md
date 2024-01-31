@@ -19,7 +19,7 @@ See - <a href="./apps/tictaktoe-typescript/">TicTacToe TypeScript</a>
 ### Ongoing
 * Redux 001 (Side by Side) Express (Side by Side) Next.js Official tutorial 001
 
-### Next:
+### Next
 -> JS Revised Topics (Side by Side) Expo RN official tutorial 001
 -> Zustand (Side by Side) React useReducer + Context API
 -> Expo Job Board App
