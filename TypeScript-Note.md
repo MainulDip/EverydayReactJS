@@ -19,5 +19,5 @@ export function ThemeProvider ({ children }: Props ) {
 ```
 
 ### Topic Refresh Using TypeScript:
-- Promise, Fetch, Async/Await, 
+- Promise, Fetch, Async/Await,
 - JSON Encoding/Decoding, Axios, Ajax
