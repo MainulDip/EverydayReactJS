@@ -7,3 +7,7 @@ with other files it will also create `components.json` in the root directory, wh
 * when adding Shadcn/ui component, no need to restart server. Components will be available automatically (no magic, as the code for the component will be added inside src/app 's `/components/ui/` directory)
 
 Docs: https://ui.shadcn.com/docs/installation/next
+
+### VSCode tricks:
+Open Current Directory In Current Windows `code -r .`
+Show/Hide SideBar => win `ctrl+b`, mac `cmd+b`
