@@ -238,7 +238,7 @@ const [invoice, customers] = await Promise.all([
     ])
 ```
 
-### Dynamic Variable Naming (Variable as Value's Key):
+### Dynamic Variable Naming (Variable as Value's Key name):
 ```js
 const hero = {
   name: 'Batman',
