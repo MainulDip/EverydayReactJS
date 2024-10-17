@@ -33,7 +33,7 @@ export default function RootLayout({
       >
         <Navbar />
         <div className="flex">
-          <div className="md:block h-[100vh]"><Sidebar /></div>
+          <div className="sm:block md:hidden lg:block h-[100vh] w-[300px]"><Sidebar /></div>
           <div className="p-5 w-full md:max-w-[1140px]">{children}</div>
         </div>
 
