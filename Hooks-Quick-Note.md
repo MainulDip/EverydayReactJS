@@ -1,7 +1,7 @@
 ## React Hooks Cheat:
 Personalized Cheat With Mini Doc and Go To Links
 
-> Call only on top level fuctional Componet
+### Call only on top level functional Component
 ```js
 function App(){
     uesEffect();
@@ -11,9 +11,7 @@ function App(){
 }
 ```
 
-### Basic Hooks:
-
->1: useState()
+### useState()
 ```js
 const [text, setText] = useState(initialValues)
 // where text is getter and setText() is setter
@@ -35,11 +33,11 @@ class Btn extends React.Component {
 }
 ```
 
->1: useEffect( () => {}, [] )
+### useEffect | Functional and Old React Class-Component:
 ```js
 useEffect( () => {}, [] )
-// Function and Dependencies is the useEffect's agruments
-// Fn will run when mounted and if specified state changed in the dependencie array
+// Function and Dependencies is the useEffect's arguments
+// Fn will run when mounted and if specified state changed in the dependence array
 // If dependency array is empty, it will run only once when mounted
 // Can Use multiple useEffect hooks in the same component
 // return Function will be called when component is removed like
@@ -47,6 +45,8 @@ useEffect( () => {}, [] )
 useEffect( () => {
     return () => alert('Goodbye Component')
 }, [] )
+
+
 // Class Based Component Alternative
 class Btn extends React.Component {
     constructor(props){
@@ -76,7 +76,8 @@ class Btn extends React.Component {
 }
 ```
 
->1: createContext() & useContext( () => {}, [] ) | share data without passing props
+### createContext & useContext:
+share data without passing props. useContext replates the Consumer API with cleaner code
 ```js
 // App.js
 const moods = {
@@ -118,11 +119,10 @@ function Chieldcomponent(){
 ```
 
 
-### Additional Hook
+### useRef():
+creates Mutable object that keeps the same reference between re-renders and also, useRef is completely separated from component render cycle
 
->1: useRef() | creates Mutable object that keeps the same reference between re-renders and also, useRef is completely separated from component render cycle
-
-Note: Best usecase => grab native HTML elements from jsx, and store previous state value
+Note: uses to grab native HTML elements from jsx, and store previous state value
 ```js
 // App.js
 const myBtn = useRef(null)
@@ -136,20 +136,8 @@ return <button onClick={ () => () => count.current++ }>ClickMe {count.current}
 // But clicking the button will not change UI because useRef does not re-render like setState
 ```
 
->1: useReducer() | Little like Redux way of state management
+### useReducer:
 ```js
-// App.js
-function App(){
-const [state, dispatch] = useReducer(reducer, initialStateValue);
-return (
- <>
-  Count: {state}
-  <button onClick={() => dispatch({type: 'decrement'})}> Minus </button>
-  <button onClick={() => dispatch({type: 'increment'})}> Plus </button>
- </>
- )
-}
-
 // reducer.js
 function reducer(state, action){
     switch (action.type) {
@@ -161,33 +149,76 @@ function reducer(state, action){
             throw new Error();
     }
 }
+
+// App.js
+function App(){
+const [state, dispatch] = useReducer(reducer, initialStateValue);
+return (
+ <>
+  Count: {state}
+  <button onClick={() => dispatch({type: 'decrement'})}> Minus </button>
+  <button onClick={() => dispatch({type: 'increment'})}> Plus </button>
+ </>
+ )
+}
 ```
 
->1: useMemo( () => {}, []) | Memorization | cache result/return of function call | Use only for expensive coputation
+### useMemo:
+Used for Memorization of function's result. `useMemo` calls its function and returns the result and cached. Used for expensive computation. 
+
+* Note: `useMemo` to memoizing values and `memo` for Component memoizing
+
 ```js
 const [count, setCounet] = useState(77777777777)
 const expensiveComputation = useMemo( () => {
     return count ** 77777777777777
 } [count])
-// it will only rerender is 'count' state update. Somewhat like the useEffect pattern
+
+```
+### useCallback:
+`useCallback` returns its function uncalled, so can be called later when the state dependencies changes. 
+
+Memorize the entire function to prevent unnecessary rerenders and fixes performance issues. 
+```tsx
+function Parent({ ... }) {
+  const [a, setA] = useState(0);
+  const onPureChange = useCallback(() => {doSomething(a);}, []);
+  ... 
+  return (
+    ...
+    <Pure onChange={onPureChange} />
+  );
+}
 ```
 
->1: useCallback( () => {}, [] ) | Memorize the entire function to prevent unnecery rerenders
-```js
-const [count, setCounet] = useState(77777777777)
-const showCount = useCallback(()=>{
-    alert(`Count ${count}`)
-}, [count])
-// when same function is passed down to multiple chield components (Lists), using useCallback could prevent that.
+### useMemo(fn, [deps]) vs useCallback(fn, [deps]):
+`useCallback` returns its function uncalled it can be called later, while useMemo calls its function and returns the result.
+
+```tsx
+function foo() {
+  return 'bar';
+}
+
+const memoizedCallback = useCallback(foo, []);
+const memoizedResult = useMemo(foo, []);
+
+memoizedCallback;
+// ƒ foo() {
+//   return 'bar';
+// }
+memoizedResult; // 'bar'
+memoizedCallback(); // 'bar'
+memoizedResult(); // 🔴 TypeError
 ```
 
->1: useImparativeHandle(ref, Fn) | uses useRef and forwardRed | Healps access and controle custom developed component libraries
+### useImparativeHandle:
+uses useRef and forwardRed. Helps access and control custom developed component libraries
 ```js
 // Button.js
 function Button(props, refs){
     const count = useRef(null)
     const clickIt = ()=> 'something'
-    // useImperativeHandle modife the exposed ref
+    // useImperativeHandle modify the exposed ref
     useImperativeHandle(ref, ()=>({
         click: ()=>{
             console.log('clicking button')
@@ -200,7 +231,8 @@ function Button(props, refs){
 Const ButtonF = forwardRef(Button)
 ```
 
->1: useLayoutEffect( () => {}, [] ) | will run after component render but before ui paint | Blocks visual updates until callback is completed
+### useLayoutEffect:
+Will run after rendering component but before ui paints. Blocks visual updates until callback is completed
 ```js
 useLayoutEffect(()=>{
     const rect = button.getBoundingClientRect()
@@ -209,9 +241,41 @@ useLayoutEffect(()=>{
 // It will run after the component render but before UI get updated/painted
 ```
 
->1: useDebugValue( () => {}, [] ) | For Custom Hooks, add custom lable
+### Custom Hooks:
+Custom Hooks are for re-usability purpose and also to hide the gnarly details of the underlying logic. To expresses intent, not the implementation.
+```js
+// defining a custom hook.
+// return the state at the end to read from other component.
+export function useOnlineStatus() {
+  const [isOnline, setIsOnline] = useState(true);
+  useEffect(() => {
+    function handleOnline() {
+      setIsOnline(true);
+    }
+    function handleOffline() {
+      setIsOnline(false);
+    }
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+  return isOnline;
+}
 
-> Custom Hooks and useDebugValue
+
+// use the custom hook form other component
+function StatusBar() {
+  const isOnline = useOnlineStatus(); // custom hook 😀
+  return <h1>{isOnline ? '✅ Online' : '❌ Disconnected'}</h1>;
+}
+```
+
+### useDebugValue:
+`useDebugValue( () => {}, [] )`, used for Custom Hooks, and to add custom label
+
 ```js
 function App(){
     const [displayName, setDisplayName] = useState();

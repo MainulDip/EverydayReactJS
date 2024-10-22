@@ -46,7 +46,7 @@ t h
 */
 ```
 ### JS Closures:
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures.
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures...
 ```js
 function makeAdder(x) {
   return function (y) {

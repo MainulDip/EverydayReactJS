@@ -109,7 +109,7 @@ clsx('foo', [1 && 'bar', { baz:false, bat:null }, ['hello', ['world']]], 'cya');
 
 ### Lib `dotenv`:
 It's a secrets manager for .env files. Run inside app using `require("dotenv").config()` or `import "dotenv/config"`
-NextJS guide => https://www.dotenv.org/docs/frameworks/nextjs/github-actions
+NextJS guide => https://www.dotenv.org/docs/frameworks/nextjs/github-actions.......
 ```sh
 # put this in a .env file
 NEXT_PUBLIC_HELLO="World"
