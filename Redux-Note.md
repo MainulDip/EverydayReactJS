@@ -3,13 +3,13 @@
 > TS: https://redux.js.org/usage/usage-with-typescript
 
 ## Redux Overviews:
-Redux is a pattern and library for managing and updating application state, using events called "actions". 
+Redux is a pattern and library for managing and updating application state, using events called `actions`. 
 
 It serves as a centralized store for state that needs to be used across the entire application, with rules ensuring that the state can only be updated in a predictable fashion.
 
 * Quick Redux Process:
-- Actions are plain objects with a type field, and describe "what happened" in the app
-- Reducers are functions that calculate a new state value based on previous state + an action
+- Actions are plain objects with a `type` field, and it describe "what happened" in the app
+- Reducers are functions that calculate a new state value based on previous state + an action. Usually implemented with `switch`
 - A Redux store runs the root reducer whenever an action is dispatched
 
 Redux commonly used together with 
@@ -24,11 +24,13 @@ Redux commonly used together with
 
 
 ### Store:
-The current Redux application state lives in an object called the store. We have a `single store` in a Redux application.
+The current Redux application state lives in an object called the store. Best practice is to have a `single store` in a Redux application.
 
 The Redux store is created using the configureStore function from Redux Toolkit. It requires a reducer or a `root reducer` (combination of multiple reducers) in its the reducer argument. 
 
 Store has a method called getState that returns the current state value
+
+* multiple stores can be applied using `a store per root component instance` manner, but is not recommended. 
 
 ```js
 import { configureStore } from '@reduxjs/toolkit'
@@ -48,7 +50,7 @@ console.log(store.getState())
 ### Actions with `type` and `payload` + Action Creators:
 An action is a plain JavaScript object that has a `type` field (and optional `payload` field for additional info about the `type` event).
 
-the type field's signture is `"domain/eventName"` where `domain` is the feature or category that this action belongs to, and the `eventName` is the specific thing that happened.
+the type field's signature is `"domain/eventName"` where `domain` is the feature or category that this action belongs to, and the `eventName` is the specific thing that happened.
 
 * An `action creator` is a function that creates and returns an action object. We typically use these so we don't have to write the action object by hand every time
 

@@ -21,4 +21,4 @@ See - <a href="./apps/tictaktoe-typescript/">TicTacToe TypeScript</a>
 
 ### Next
 -> Zustand (Side by Side) React useReducer + Context API
--> Expo Job Board App
+-> Expo Job Board App.
