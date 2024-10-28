@@ -98,7 +98,7 @@ arr3.push('c')
 ```
 
 ### Closure | Curried | Currying | Multiple chained Arrow fn:
-Closure can be called using `fn(v)(f)` way.
+Closure can be called using `fn(v)(f)` way
 
 ```js
 const checkIfOdd = (amount) => (dispatch) => {

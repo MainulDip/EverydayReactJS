@@ -8,7 +8,7 @@ unidirectional data flow is -> state going down from parent to child component (
 ### useReducer with Context API
 
 ### Suspense:
-<Suspense> lets you display a fallback until its children have finished loading.
+<Suspense> lets you display a fallback until its children have finished loading
 
 ```js
 <Suspense fallback={<Loading />}>

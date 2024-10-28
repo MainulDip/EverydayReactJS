@@ -14,7 +14,9 @@ It serves as a centralized store for state that needs to be used across the enti
 
 Redux commonly used together with 
 `React-Redux` -> lets React components interact with a Redux store by reading pieces of state and dispatching actions to update the store.
-`Redux-ToolKit` -> is the recommended approach for writing Redux logic. It contains packages and functions that are kinda best practices directed by official docs. 
+
+`Redux-ToolKit` -> RTK includes utilities that help simplify many common use cases, including `store setup`, `creating reducers` and writing `immutable update` logic, and even creating entire `slices` of state at once. Redux (`core`) can be used without RTK, but RTL makes it easier. 
+
 `Redux DevTools Extension` -> its a debug tool for redux and shows a history of the changes to the state in the store over time by `time-travel debugging`
 
 ### Terms and Concepts:
@@ -22,6 +24,109 @@ Redux commonly used together with
 
 - `immutable state update` -> make copies of existing objects/arrays, and then modify the copies using object `spread operators | ...obj`, as well as array methods (concat/slice) that return new copies of the array instead of mutating the original array. Redux expects that all state updates are done immutably.
 
+### Redux (core) vs Redux Toolkit:
+Redux (core) is
+- `createStore` to actually create a Redux store
+- `combineReducers` to combine multiple slice reducers into a single larger reducer
+- `applyMiddleware` to combine multiple middleware into a store enhancer
+- `compose` to combine multiple store enhancers into a single store enhancer
+
+Redux Toolkit: Helps manage redux application by
+- provide helper function (`createSlice`) that can replace manual reducer function which consist of `switch` statements, action creators and action type.
+- a single function `configureStore` to setup store, combine reducers, adding thunk middleware and devTool integration. 
+- `createSlice` with the help of `Immer library` makes writing immutable updates easier (ie, `state.value = 123`) instead of spread syntax. also it automatically generates `action creators` and `action types` for each reducer based on it's name internally. 
+
+Redux Toolkit also provides
+- `createAsyncThunk`: abstracts the standard "dispatch actions before/after an async request" pattern
+- `createEntityAdapter`: prebuilt reducers and selectors for CRUD operations on normalized state
+- `createSelector`: a re-export of the standard Reselect API for memoized selectors
+- `createListenerMiddleware`: a side effects middleware for running logic in response to dispatched actions
+
+
+### Example Using Toolkit vs Vanilla
+When reducers are defined using `createSlice`, all `action creators` and `action types` are generated based on the reducer name
+```js
+import { createSlice } from '@reduxjs/toolkit'
+
+const todosSlice = createSlice({
+  name: 'todos',
+  initialState: [],
+  reducers: {
+    todoAdded(state, action) {
+      state.push({
+        id: action.payload.id,
+        text: action.payload.text,
+        completed: false
+      })
+    },
+    todoToggled(state, action) {
+      const todo = state.find(todo => todo.id === action.payload)
+      todo.completed = !todo.completed
+    }
+  }
+})
+
+export const { todoAdded, todoToggled } = todosSlice.actions
+export default todosSlice.reducer
+
+// All of the action creators and action types are generated automatically
+```
+
+* `configureStore` example
+
+```js
+import { configureStore } from '@reduxjs/toolkit'
+import todosReducer from '../features/todos/todosSlice'
+import filtersReducer from '../features/filters/filtersSlice'
+
+export const store = configureStore({
+  reducer: {
+    todos: todosReducer,
+    filters: filtersReducer
+  }
+})
+```
+
+* vs vanilla way of writing reducer function using switch and manual type setup
+
+```js
+const ADD_TODO = 'ADD_TODO'
+const TODO_TOGGLED = 'TODO_TOGGLED'
+
+export const addTodo = text => ({
+  type: ADD_TODO,
+  payload: { text, id: nanoid() }
+})
+
+export const todoToggled = id => ({
+  type: TODO_TOGGLED,
+  payload: id
+})
+
+export const todosReducer = (state = [], action) => {
+  switch (action.type) {
+    case ADD_TODO:
+      return state.concat({
+        id: action.payload.id,
+        text: action.payload.text,
+        completed: false
+      })
+    case TODO_TOGGLED:
+      return state.map(todo => {
+        if (todo.id !== action.payload) return todo
+
+        return {
+          ...todo,
+          completed: !todo.completed
+        }
+      })
+    default:
+      return state
+  }
+}
+
+// creating reducer function without using Redux Toolkit
+```
 
 ### Store:
 The current Redux application state lives in an object called the store. Best practice is to have a `single store` in a Redux application.
@@ -48,7 +153,7 @@ console.log(store.getState())
 ```
 
 ### Actions with `type` and `payload` + Action Creators:
-An action is a plain JavaScript object that has a `type` field (and optional `payload` field for additional info about the `type` event).
+An action is a plain JavaScript object that has a `type` field (and optional `payload` field for additional info about the `type` event)...
 
 the type field's signature is `"domain/eventName"` where `domain` is the feature or category that this action belongs to, and the `eventName` is the specific thing that happened.
 
