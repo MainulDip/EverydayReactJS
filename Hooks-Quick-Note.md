@@ -164,7 +164,7 @@ return (
 ```
 
 ### useMemo:
-Used for Memorization of function's result. `useMemo` calls its function and returns the result and cached. Used for expensive computation. 
+Used for Memorization of function's result. `useMemo` calls its function and returns the result and cached. Used for expensive computation
 
 * Note: `useMemo` to memoizing values and `memo` for Component memoizing
 

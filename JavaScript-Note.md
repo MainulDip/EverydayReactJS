@@ -256,3 +256,49 @@ console.log(name); // => 'Batman'
 - Promise, Fetch, Async/Await, Futures
 - JSON Encoding/Decoding, Axios, Ajax
 - Node.js and Express REST implementation
+
+
+
+### Copy and Save Canvas to png/jpeg:
+Get the canvas by it's id or something
+Convert to data url & copy to clipboard or download directly to pc
+
+```js
+var canvas = document.getElementById("<find-the-canvas-id>");
+var dataUrl = canvas.toDataURL();
+var dataUrlJPEG = canvas.toDataURL("image/jpeg", 0.7); // `image/png` is default
+// toDataURL(type, encoderOptions: Number) 
+// where type can be `image/jpeg` or `png` or `webp` ect. 
+// And encoderOptions can be a number between 0 to 1, where 1 is the best quality
+
+// Now copy that to the pc's clipboard and convert that to PNG file
+copy(dataUrl); 
+
+
+// Destructive approach
+// document.write('<img src="'+dataUrl+'"/>');
+document.write(`<img src="${dataUrl}"/>`);
+
+// Not working on chrome
+var image = dataUrl.replace("image/png", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
+// window.location.href = image; // not working
+
+
+// Non destructive approach
+const link = document.createElement("a");
+link.href = dataUrl;
+link.download = "someFileName.png";
+link.click();
+```
+
+* function to download a dataUrl
+```js
+function download(dataurl, filename) {
+  const link = document.createElement("a");
+  link.href = dataurl;
+  link.download = filename;
+  link.click();
+}
+
+download("someDataUrl", "fileType.extension");
+```
